@@ -1,4 +1,4 @@
 export default class Number {
 
-    constructor(public numberguess:number, public randomvalue:number) {}
+    constructor(public guesscounter:number, public number:number, public randomvalue:number, public textvalue:string) {}
 }
