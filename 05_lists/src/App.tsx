@@ -1,6 +1,7 @@
-import { useState } from 'react'
-import ContactForm from './components/contactform'
-import Contact from './models/contact'
+import { useState } from 'react';
+import ContactForm from './components/contactform';
+import Contact from './models/contact';
+import ContactList from './components/contactlist';
 
 interface State {
   list:Contact[];
@@ -23,10 +24,22 @@ function App() {
       }
     })
   }
+
+  const removeContact = (id:number) => {
+    setState((state) => {
+      const tempList = state.list.filter(contact => contact.id !== id);
+      return {
+          ...state,
+          list:tempList
+      }
+    })
+  }
   
   return (
     <>
       <ContactForm addContact={addContact}/>
+      <hr/>
+      <ContactList list={state.list} removeContact={removeContact}/>
     </>
   )
 }
