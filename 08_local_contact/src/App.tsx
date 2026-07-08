@@ -1,0 +1,47 @@
+import { useState } from 'react';
+import ContactForm from './components/contactform';
+import Contact from './models/contact';
+import ContactList from './components/contactlist';
+
+interface State {
+  list:Contact[];
+  id:number;
+}
+
+function App() {
+
+  const [state, setState] = useState<State>({
+    list:[],
+    id:100
+  })  
+  
+  const addContact = (contact:Contact) => {
+    contact.id = state.id;
+    setState((state) => {
+      return {
+        list:state.list.concat(contact),
+        id:state.id+1
+      }
+    })
+  }
+
+  const removeContact = (id:number) => {
+    setState((state) => {
+      const tempList = state.list.filter(contact => contact.id !== id);
+      return {
+          ...state,
+          list:tempList
+      }
+    })
+  }
+  
+  return (
+    <>
+      <ContactForm addContact={addContact}/>
+      <hr/>
+      <ContactList list={state.list} removeContact={removeContact}/>
+    </>
+  )
+}
+
+export default App
