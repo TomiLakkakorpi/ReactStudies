@@ -36,12 +36,26 @@ function App() {
       }
     })
   }
+
+  const editContact = (contact:Contact) => {
+    for(let i=0;i<state.list.length;i++) {
+      if(state.list[i].id === contact.id) {
+        setState((state) => {
+          const tempList = state.list.toSpliced(i, 1, contact);
+          return {
+            ...state,
+            list:tempList
+          }
+        })
+      }
+    }
+  }
   
   return (
     <>
       <Navbar/>
       <Routes>
-        <Route path="/" element={<ContactList list={state.list} removeContact={removeContact}/>}/>
+        <Route path="/" element={<ContactList list={state.list} editContact={editContact} removeContact={removeContact}/>}/>
         <Route path="/form" element={<ContactForm addContact={addContact}/>}/>
         <Route path="*" element={<Navigate to="/"/>}/>
       </Routes>
