@@ -2,6 +2,8 @@ import { useState } from 'react';
 import ContactForm from './components/contactform';
 import Contact from './models/contact';
 import ContactList from './components/contactlist';
+import Navbar from './components/Navbar';
+import {Routes, Route, Navigate} from 'react-router'
 
 interface State {
   list:Contact[];
@@ -37,9 +39,12 @@ function App() {
   
   return (
     <>
-      <ContactForm addContact={addContact}/>
-      <hr/>
-      <ContactList list={state.list} removeContact={removeContact}/>
+      <Navbar/>
+      <Routes>
+        <Route path="/" element={<ContactList list={state.list} removeContact={removeContact}/>}/>
+        <Route path="/form" element={<ContactForm addContact={addContact}/>}/>
+        <Route path="*" element={<Navigate to="/"/>}/>
+      </Routes>
     </>
   )
 }
