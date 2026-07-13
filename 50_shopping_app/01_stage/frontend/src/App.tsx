@@ -1,15 +1,20 @@
 import ShoppingForm from "./components/ShoppingForm";
 import useAction from "./hooks/useAction"
 import ShoppingList from "./components/ShopingList";
+import Navbar from './components/NavBar'
+import {Routes, Route, Navigate} from 'react-router'
 
 function App() {
   const {state, add, remove, edit} = useAction();
 
   return (
     <>
-      <ShoppingForm add={add}/>
-      <hr/>
-      <ShoppingList list={state.list} remove={remove} edit={edit}/>
+      <Navbar/>
+      <Routes>
+        <Route path="/" element={<ShoppingList list={state.list} remove={remove} edit={edit}/>}/>
+        <Route path="/form" element={<ShoppingForm add={add}/>}/>
+        <Route path="*" element={<Navigate to="/"/>}/>
+      </Routes>
     </>
   )
 }

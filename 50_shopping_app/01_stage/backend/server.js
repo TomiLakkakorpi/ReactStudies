@@ -4,7 +4,7 @@ const app = express();
 
 app.use(express.json());
 
-//Database
+//DATABASE
 let database = [];
 let id = 100;
 
@@ -15,32 +15,32 @@ let id = 100;
 //id number
 
 //SHOPPING API
-//GET       /api/shopping           Get shopping ListFormat
-//POST      /api/shopping           Add new item
-//DELETE    /api/shopping/:id       Delete item with ID
-//PUT       /api/shopping/:id       edit item with ID
+//GET 		/api/shopping		get shopping ListFormat
+//POST		/api/shopping		add new item
+//DELETE	/api/shopping/:id	delete item with id
+//PUT 		/api/shopping/:id	edit item with id
 
 app.get("/api/shopping",function(req,res) {
-    return res.status(200).json(database);
+	return res.status(200).json(database);
 })
 
 app.post("/api/shopping",function(req,res) {
-    let item = {
-        type:req.body.type,
-        count:req.body.count,
-        price:req.body.price,
-        id:id
-    }
-    id++;
-    database.push(item);
-    console.log(database);
-    return res.status(201).json(item);
+	let item = {
+		type:req.body.type,
+		count:req.body.count,
+		price:req.body.price,
+		id:id
+	}
+	id++;
+	database.push(item);
+	console.log(database);
+	return res.status(201).json(item);
 })
 
 app.delete("/api/shopping/:id",function(req,res) {
-    let tempId = parseInt(req.params.id);
-    database = database.filter(item => item.id !== tempId);
-    return res.status(200).json({"Message":"Success"});
+	let tempId = parseInt(req.params.id);
+	database = database.filter(item => item.id !== tempId);
+	return res.status(200).json({"Message":"Success"});
 })
 
 app.put("/api/shopping/:id",function(req,res) {
