@@ -3,7 +3,7 @@ import useAction from "./hooks/useAction"
 import ShoppingList from "./components/ShopingList";
 
 function App() {
-  const {state,add, remove, edit} = useAction();
+  const {state, add, remove, edit} = useAction();
 
   return (
     <>

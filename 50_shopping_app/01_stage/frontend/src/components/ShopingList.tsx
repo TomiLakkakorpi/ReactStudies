@@ -51,6 +51,7 @@ const ShoppingList = (props:Props) => {
     }
 
     const remove = (id:number) => {
+        console.log("Deleting item with ID " +id)
         props.remove(id);
         changeMode("cancel",0);
     }
