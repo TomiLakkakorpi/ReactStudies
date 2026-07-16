@@ -1,7 +1,14 @@
 import {Link} from 'react-router'
 
-const Navbar = () => {
-    return(
+interface Props {
+    isLogged:boolean,
+    user:string,
+    logout():void;
+}
+
+const Navbar = (props: Props) => {
+    if(props.isLogged) {
+        return(
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
             <a className="navbar-brand" style={{marginLeft:10}}>Shopping App</a>
             <ul className="navbar-nav">
@@ -11,9 +18,22 @@ const Navbar = () => {
                 <li className="nav-item" style={{marginLeft:10}}>
                     <Link to="/form" className="nav-link">Add new item</Link>
                 </li>
+                <li className="nav-item" style={{marginLeft:10}}>
+                    <p style={{"color":"blue"}} className="nav-link">Logged in as {props.user}</p>
+                </li>
+                <li className="nav-item" style={{marginLeft:10}}>
+                    <Link to="/" className="nav-link" onClick={() => props.logout()}>Logout</Link>
+                </li>
             </ul>
         </nav>
-    )
+        )
+    } else {
+        return(
+            <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                <a className="navbar-brand" style={{marginLeft:10}}>Shopping App</a>
+            </nav>
+        )
+    }
 }
 
 export default Navbar;
