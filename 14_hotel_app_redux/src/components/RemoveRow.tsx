@@ -16,7 +16,7 @@ const RemoveRow = (props:Props) => {
             <td>{props.hotel.stars}</td>
             <td>{props.hotel.roomprice}</td>
             <td><button className="btn btn-secondary" onClick={() => props.changeMode("cancel", 0)}>Cancel</button></td>
-            <td><button className="btn btn-danger" onClick={() => props.remove(props.hotel.id)}>Edit</button></td>
+            <td><button className="btn btn-danger" onClick={() => props.remove(props.hotel.id)}>Remove</button></td>
         </tr>
     )
 }
