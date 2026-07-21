@@ -3,10 +3,10 @@ import ShoppingItem from '../models/ShoppingItem';
 import Row from './Row';
 import RemoveRow from './RemoveRow';
 import EditRow from './EditRow';
-import {removeItem,editItem} from '../actions/shoppingActions';
+import {removeItem,editItem} from '../store/shoppingSLice';
 import {useDispatch,useSelector} from 'react-redux';
-import type {AppState,Action} from '../types/states';
-import type {ThunkDispatch} from 'redux-thunk';
+import type {AppState} from '../types/states';
+import type {ThunkDispatch, PayloadAction} from '@reduxjs/toolkit';
 
 interface State {
 	removeIndex:number;
@@ -15,7 +15,7 @@ interface State {
 
 const ShoppingList = () => {
 	
-	const dispatch:ThunkDispatch<AppState,any,Action> = useDispatch();
+	const dispatch:ThunkDispatch<AppState,any,PayloadAction> = useDispatch();
 	
 	const stateSelector = (state:AppState) => {
 		return {
@@ -61,12 +61,12 @@ const ShoppingList = () => {
 	}
 	
 	const remove = (id:string) => {
-		dispatch(removeItem(token,id));
+		dispatch(removeItem({message:id, token:token}));
 		changeMode("cancel",0);
 	}
 	
 	const edit = (item:ShoppingItem) => {
-		dispatch(editItem(token,item));
+		dispatch(editItem({item:item, token:token}));
 		changeMode("cancel",0);
 	}
 	

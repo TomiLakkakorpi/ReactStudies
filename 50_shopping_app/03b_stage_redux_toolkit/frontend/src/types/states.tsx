@@ -1,5 +1,4 @@
 import ShoppingItem from '../models/ShoppingItem';
-import type {Reducer} from 'redux'
 
 export interface LoginState {
     isLogged:boolean;
@@ -19,12 +18,16 @@ export interface AppState{
     login:LoginState;
 }
 
-export interface Action {
-    type:string;
-    payload?:ShoppingItem[] | string;
+export interface Message {
+    message:string;
+    token:string
 }
 
-export interface RootReducer {
-    login:Reducer<LoginState,Action>
-    shopping:Reducer<ShoppingState,Action>
+export interface Token {
+    token:string
+}
+
+export interface FetchItem {
+    item:ShoppingItem;
+    token:string
 }
