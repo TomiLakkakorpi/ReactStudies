@@ -3,9 +3,8 @@ import Row from './Row';
 import RemoveRow from './RemoveRow';
 import EditRow from './EditRow';
 import { useState } from 'react';
-import {useDispatch,useSelector } from 'react-redux';
-import { removeHotel, editHotel } from '../actions/hotelActions';
-import type {AppState} from '../types/states';
+import useAction from '../hooks/useAction';
+import useAppState from '../hooks/useAppState';
 
 interface State {
     removeIndex:number;
@@ -19,11 +18,9 @@ const HotelList = () => {
         editIndex:-1
     })
 
-    const dispatch = useDispatch();
+    const{removeHotel, editHotel} = useAction();
 
-    const listSelector = (state:AppState) => state.list;
-
-    const list = useSelector(listSelector);
+    const {list} = useAppState();
 
     const changeMode = (mode:string,index:number) => {
         switch(mode) {
@@ -55,12 +52,12 @@ const HotelList = () => {
     }
     
     const remove = (id:number) => {
-        dispatch(removeHotel(id));
+        removeHotel(id);
         changeMode("cancel",0)
     }
     
     const edit = (hotel:Hotel) => {
-        dispatch(editHotel(hotel));
+        editHotel(hotel);
         changeMode("cancel",0)
     }
 

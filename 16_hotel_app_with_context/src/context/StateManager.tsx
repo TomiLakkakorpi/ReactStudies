@@ -57,7 +57,7 @@ const StateManager = (props:Props) => {
 
     return(
         <AppStateContext.Provider value={state}>
-            <ActionContext.Provider value={dispatch as any}>
+            <ActionContext.Provider value={{dispatch:dispatch}}>
                 {props.children}
             </ActionContext.Provider>
         </AppStateContext.Provider>
